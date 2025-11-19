@@ -3,6 +3,12 @@
 """The main entry point for the werewolf game."""
 import asyncio
 import os
+import sys
+
+# 加载环境变量
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from load_env import load_env
+load_env()
 
 from game import werewolves_game
 

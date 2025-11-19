@@ -1,5 +1,12 @@
 import asyncio
 import os
+import sys
+
+# 加载环境变量
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from load_env import load_env
+load_env()
+
 import agentscope
 from agentscope.agent import ReActAgent, UserAgent
 from agentscope.model import DashScopeChatModel
@@ -8,7 +15,6 @@ from agentscope.message import Msg
 from agentscope.pipeline import fanout_pipeline
 
 # 导入 hook 以便消息能显示在 Studio 界面
-import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '../friday'))
 from hook import studio_pre_print_hook, studio_post_reply_hook
 
@@ -20,7 +26,7 @@ def create_models():
     if not api_key:
         raise ValueError(
             "未找到 DASHSCOPE_API_KEY 环境变量。\n"
-            "请设置环境变量：export DASHSCOPE_API_KEY='your-api-key'"
+            "请在项目根目录创建 .env 文件并添加：DASHSCOPE_API_KEY=your-api-key"
         )
     
     # Qwen-Max 模型 - 最强性能
